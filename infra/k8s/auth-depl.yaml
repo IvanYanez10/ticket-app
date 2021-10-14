@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: cygnetops/auth
+          #image: us.gcr.io/tickets-app-dev/auth
+          image: ivanyz/auth
 ---
 apiVersion: v1
 kind: Service
