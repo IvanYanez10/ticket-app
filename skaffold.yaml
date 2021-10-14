@@ -8,7 +8,7 @@ build:
   local:
     push: false
   #googleCloudBuild:
-  #  projectId: 	tickets-app-dev
+  #projectId: tickets-app-dev
   artifacts:
     #- image: us.gcr.io/tickets-app-dev/auth
     - image: ivanyz/auth
