@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 
-export default () => {
+const signup = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,10 +15,10 @@ export default () => {
     onSuccess: () => Router.push('/')
   });
 
-  const onSubmit = (e) => {
+  const onSubmit = async event => {
     event.preventDefault();
-    doRequest();
-  }
+    await doRequest();
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -47,3 +47,5 @@ export default () => {
     </form>
   );
 };
+
+export default signup;
