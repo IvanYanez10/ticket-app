@@ -14,10 +14,11 @@ import { NotFoundError } from './errors/not-found-error';
 const app = express();
 app.set('trust proxy', true);
 app.use(json());
+// secure value to flse in test
 app.use(
   cookieSession({
     signed: false,
-    secure: true
+    secure: process.env.NODE_ENV !== 'test'
   })
 );
 
