@@ -7,10 +7,7 @@ deploy:
 build:
   local:
     push: false
-  #googleCloudBuild:
-  #projectId: tickets-app-dev
   artifacts:
-    #- image: us.gcr.io/tickets-app-dev/auth
     - image: ivanyz/auth
       context: auth
       docker:
@@ -18,4 +15,12 @@ build:
       sync:
         manual:
           - src: 'src/**/*.ts'
+            dest: .
+    - image: ivanyz/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
             dest: .
