@@ -8,4 +8,16 @@ const stan = nats.connect(
 
 stan.on('connect', () => {
   console.log('publiher connected to NATS');
+
+// just cant share raw data
+  const data = JSON.stringify({
+    id: '',
+    title: 'concert',
+    price: 20
+  });
+
+  stan.publish('ticket:created', data, () => {
+    console.log('event publish');
+  });
+
 });
