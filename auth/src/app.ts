@@ -8,8 +8,7 @@ import { CurrentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/singnin';
 import { signoutRouter } from './routes/singnout';
 import { signupRouter } from './routes/singnup';
-import { errorHandler } from './middlewares/error-handler';
-import { NotFoundError } from './errors/not-found-error';
+import { errorHandler, NotFoundError } from '@iytickets/common';
 
 const app = express();
 app.set('trust proxy', true);
