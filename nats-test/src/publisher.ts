@@ -1,4 +1,5 @@
 import nats from 'node-nats-streaming';
+import { TicketCreatedPublisher } from './events/ticket-created-publisher';
 
 const stan = nats.connect(
   'tickets', 
@@ -6,10 +7,22 @@ const stan = nats.connect(
   { url: 'http://localhost:4222' }
 );
 
-stan.on('connect', () => {
+stan.on('connect', async () => {
   console.log('publiher connected to NATS');
 
+  const publisher = new TicketCreatedPublisher(stan);
+  try{
+    await publisher.publish({
+      id: '',
+      title: 'concert',
+      price: 20
+    });
+  }catch(e){
+    console.error(e);
+  }
+
 // just cant share raw data
+/*
   const data = JSON.stringify({
     id: '',
     title: 'concert',
@@ -19,5 +32,5 @@ stan.on('connect', () => {
   stan.publish('ticket:created', data, () => {
     console.log('event publish');
   });
-
+*/
 });
