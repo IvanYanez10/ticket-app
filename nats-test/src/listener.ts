@@ -11,7 +11,7 @@ const stan = nats.connect(
 );
 
 stan.on('connect', () => {
-  console.log('listener connected to NATS');
+  console.log('Listener connected to NATS');
 
   stan.on('close', () => {
     console.log('NATS connection closed!');
