@@ -15,7 +15,8 @@ spec:
       containers:
         - name: nats
           image: nats-streaming
-          args: [
+          args: 
+          [
             '-p',
             '4222',
             '-m',

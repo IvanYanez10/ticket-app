@@ -9,8 +9,8 @@ declare global{
 }
 
 beforeAll(async () => {
-  process.env.JWT_KEY = 'asdf';
-  mongo = await MongoMemoryServer.create();
+  process.env.JWT_KEY = 'secretasdfasdf';
+  mongo = new MongoMemoryServer();
   const mongoUri = await mongo.getUri();
 
   await mongoose.connect(mongoUri);

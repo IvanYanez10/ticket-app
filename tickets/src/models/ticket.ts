@@ -37,7 +37,7 @@ const ticketSchema = new mongoose.Schema({
     transform(doc, ret){
       ret.id = ret._id;
       delete ret._id;
-      delete ret.__v;
+      //delete ret.__v;
   }}
 });
 
@@ -45,6 +45,6 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
 };
 
-const Ticket = mongoose.model<TicketDoc, TicketModel>('ticket', ticketSchema);
+const Ticket = mongoose.model<TicketDoc, TicketModel>('Ticket', ticketSchema);
 
 export { Ticket };
