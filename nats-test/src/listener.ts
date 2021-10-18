@@ -1,12 +1,12 @@
-import { randomBytes } from 'crypto';
 import nats from 'node-nats-streaming';
+import { randomBytes } from 'crypto';
 import { TicketCreatedListener } from './events/ticket-created-listener';
 
 console.clear();
 
 const stan = nats.connect(
   'tickets', 
-  randomBytes(4).toString('hex'),    // clientID nats has a list of clients
+  randomBytes(4).toString('hex'), 
   { url: 'http://localhost:4222' }
 );
 
@@ -18,9 +18,8 @@ stan.on('connect', () => {
     process.exit();
   });
 
-  new TicketCreatedListener(stan).listen;
-
+  new TicketCreatedListener(stan).listen();
 });
 
-process.on('SIGINT', () => stan.close()); // interrrupt signals
-process.on('SIGTERM', () => stan.close()); // terminate signals
+process.on('SIGINT', () => stan.close());
+process.on('SIGTERM', () => stan.close());
