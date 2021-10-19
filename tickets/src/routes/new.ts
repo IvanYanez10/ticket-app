@@ -29,6 +29,7 @@ async (req: Request, res: Response) => {
     userId: req.currentUser!.id
   });
 
+  console.log('tick: ',ticket);
   await ticket.save();
 
   await new TicketCreatedPublisher(natsWrapper.client).publish({
