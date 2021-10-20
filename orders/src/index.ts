@@ -21,8 +21,8 @@ const start = async () => {
 
   try {
     await natsWrapper.connect(
-      'tickets', //process.env.NATS_CLOUSTER_ID, 
-      'some-tickets-client', //process.env.NATS_CLIENT_ID,
+      'orders', //process.env.NATS_CLOUSTER_ID, 
+      'some-orders-client', //process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
     );
     natsWrapper.client.on('close', () => {
@@ -39,7 +39,7 @@ const start = async () => {
   }
 
   app.listen(3000, () => {
-    console.log('Listening on port 3000 tickets');
+    console.log('Listening on port 3000 orders');
   });
 };
 
