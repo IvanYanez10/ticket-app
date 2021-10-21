@@ -3,6 +3,9 @@ import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth } from 
 import { Order, OrderStatus } from "../models/order";
 import mongoose from 'mongoose';
 
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
+import { natsWrapper } from "../nats-wrapper";
+
 const router = express.Router();
 // really we are updating order.status
 router.delete(
@@ -16,7 +19,7 @@ async (req: Request, res: Response) => {
     throw new BadRequestError('TicketId must be provided');
   }
 
-  const order = await Order.findById(orderId);
+  const order = await Order.findById(orderId).populate('ticket');
 
   if(!order){
     throw new NotFoundError();
@@ -31,6 +34,12 @@ async (req: Request, res: Response) => {
   await order.save();
 
   // publishing an event saying this was cancelled
+  await new OrderCancelledPublisher(natsWrapper.client).publish({
+    id: order.id,
+    ticket: {
+      id: order.ticket.id,  
+    }
+  });
 
   // change state if change request method
   res.status(204).send(order);

@@ -3,6 +3,7 @@ import { Order, OrderStatus } from './order';
 
 // describes the properties that are required to create
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
 }
@@ -40,7 +41,11 @@ const ticketSchema = new mongoose.Schema({
 
 // for check with TS we call this function
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+  return new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price
+  });
 };
 
 // run query look at all orders. find an order where the ticket
