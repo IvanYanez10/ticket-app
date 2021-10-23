@@ -57,6 +57,7 @@ async (req: Request, res: Response) => {
     id: order.id,
     status: order.status,
     userId: order.userId,
+    version: order.version,
     expiresAt: order.expiresAt.toISOString(),  // utc time stamp
     ticket: {
       id: ticket.id,

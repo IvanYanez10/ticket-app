@@ -18,6 +18,7 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  version: number;
 }
 
 // describes the properties that user model has

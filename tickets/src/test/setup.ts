@@ -14,8 +14,8 @@ let mongo: any;
 
 beforeAll(async () => {
   process.env.JWT_KEY = 'secretasdfasdf';
-  mongo = new MongoMemoryServer();//await MongoMemoryServer.create();//
-  const mongoUri = await mongo.getUri();
+  mongo = await MongoMemoryServer.create();
+  const mongoUri = mongo.getUri();
 
   await mongoose.connect(mongoUri);
 });

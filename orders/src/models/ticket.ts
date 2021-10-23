@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { Order, OrderStatus } from './order';
 
 // describes the properties that are required to create
@@ -12,6 +13,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
+  version: number;
   isReserved(): Promise<boolean>;
 }
 
@@ -47,6 +49,9 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
     price: attrs.price
   });
 };
+
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 // run query look at all orders. find an order where the ticket
 // is the ticket we just found *and* the order status is *not* cancelled
