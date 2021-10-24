@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { OrderStatus } from '@iytickets/common';
 import { TicketDoc } from './ticket';
 
@@ -12,7 +13,7 @@ interface OrderAttrs {
   ticket: TicketDoc;
 }
 
-// properties uer document has
+// properties user document has
 interface OrderDoc extends mongoose.Document {
   userId: string;
   status: OrderStatus;
@@ -53,6 +54,9 @@ const orderSchema = new mongoose.Schema({
       delete ret.__v;
   }}
 });
+
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 // for check with TS we call this function
 orderSchema.statics.build = (attrs: OrderAttrs) => {

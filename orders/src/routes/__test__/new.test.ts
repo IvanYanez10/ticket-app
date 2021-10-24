@@ -21,6 +21,7 @@ it('returns an error if the ticket is already reserved', async () => {
   
   //save a ticket and order to db
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 10
   });
@@ -46,6 +47,7 @@ it('reserves a ticket', async () => {
 
   //save a ticket to db
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 10
   });
@@ -63,6 +65,7 @@ it('emits an order created event', async () => {
 
   //save a ticket to db
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 10
   });
