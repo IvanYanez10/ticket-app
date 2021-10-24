@@ -20,6 +20,7 @@ export interface TicketDoc extends mongoose.Document {
 // describes the properties that user model has
 interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
+  findByEvent(event: { id: string, version:number }): Promise<TicketDoc | null>;
 }
 
 const ticketSchema = new mongoose.Schema({
@@ -51,7 +52,27 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
 };
 
 ticketSchema.set('versionKey', 'version');
-ticketSchema.plugin(updateIfCurrentPlugin);
+
+ticketSchema.plugin(updateIfCurrentPlugin); // 396 optional
+
+// if we are not using updateIfCurrentPlugin
+/*
+ticketSchema.pre('save', function(done) {
+  // @ts-ignore
+  this.$where = {
+    version: this.get('version') -1
+  }
+
+  done();
+
+});
+*/
+ticketSchema.statics.findByEvent = (event: { id: string, version: number }) => {
+  return Ticket.findOne({
+    _id: event.id,
+    version: event.version -1
+  })
+};
 
 // run query look at all orders. find an order where the ticket
 // is the ticket we just found *and* the order status is *not* cancelled

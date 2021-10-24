@@ -52,9 +52,3 @@ it('fetch orders for an particular user', async () => {
   expect(response.body[0].id).toEqual(orderOne.id);
   expect(response.body[1].id).toEqual(orderTwo.id);
 });
-
-it('returns an error if the ticket is already reserved', async () => {});
-
-it('reserves a ticket', async () => {});
-
-it.todo('emits an order created event');
