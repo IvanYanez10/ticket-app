@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import { body } from 'express-validator';
-import { requireAuth, validateRequest, NotFoundError, NotAuthorizedError } from '@iytickets/common';
+import { requireAuth, validateRequest, NotFoundError, NotAuthorizedError, BadRequestError } from '@iytickets/common';
 import { Ticket } from '../models/ticket';
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
 import { natsWrapper } from '../nats-wrapper';
@@ -26,6 +26,10 @@ async (req: Request, res: Response) => {
   
   if(!ticket){
     throw new NotFoundError();
+  }
+
+  if(ticket.orderId){
+    throw new BadRequestError('Cannot edit a reserved ticket');
   }
 
   if(ticket.userId !== req.currentUser!.id){
