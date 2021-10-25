@@ -39,19 +39,17 @@ const orderSchema = new mongoose.Schema({
     default: OrderStatus.Created  // optional
   },
   expiresAt: {
-    type: mongoose.Schema.Types.Date, 
-    required: true
+    type: mongoose.Schema.Types.Date,
   },
   ticket: {
     type: mongoose.Schema.Types.ObjectId, 
-    required: true
+    ref: 'Ticket'
   }
 }, {
   toJSON: {
     transform(doc, ret){
       ret.id = ret._id;
       delete ret._id;
-      delete ret.__v;
   }}
 });
 

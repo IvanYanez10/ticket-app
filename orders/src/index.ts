@@ -32,7 +32,7 @@ const start = async () => {
       process.env.NATS_URL
     );
     natsWrapper.client.on('close', () => {
-      console.log('NATS connection closed!');
+      console.log('NATS connection closed');
       process.exit();
     });
     process.on('SIGINT', () => natsWrapper.client.close());
@@ -50,7 +50,7 @@ const start = async () => {
   }
 
   app.listen(3000, () => {
-    console.log('Listening on port 3000 orders');
+    console.log('Listening on port 3000');
   });
 };
 

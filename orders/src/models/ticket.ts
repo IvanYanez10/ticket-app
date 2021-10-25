@@ -20,7 +20,10 @@ export interface TicketDoc extends mongoose.Document {
 // describes the properties that user model has
 interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
-  findByEvent(event: { id: string, version:number }): Promise<TicketDoc | null>;
+  findByEvent(event: { 
+    id: string;
+    version:number;
+  }): Promise<TicketDoc | null>;
 }
 
 const ticketSchema = new mongoose.Schema({
@@ -38,7 +41,6 @@ const ticketSchema = new mongoose.Schema({
     transform(doc, ret){
       ret.id = ret._id;
       delete ret._id;
-      delete ret.__v;
   }}
 });
 

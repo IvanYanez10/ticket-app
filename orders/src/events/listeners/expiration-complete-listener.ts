@@ -25,7 +25,7 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
       id: order.id,
       version: order.version,
       ticket: {
-        id: order.ticket.id
+        id: order.ticket._id.toString()
       }
     });
 
