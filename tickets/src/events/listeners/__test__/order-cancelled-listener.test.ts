@@ -43,7 +43,7 @@ const setup = async () => {
 // make it for separated
 it('updates the ticket, publishes an event and acks the message', async () => {
 
-  const { listener, ticket, data, msg, orderId } = await setup();
+  const { listener, ticket, data, msg } = await setup();
 
   // call the onMessage function with the data object + message object
   await listener.onMessage(data, msg);
