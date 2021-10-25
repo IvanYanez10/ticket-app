@@ -42,15 +42,6 @@ const ticketSchema = new mongoose.Schema({
   }}
 });
 
-// for check with TS we call this function
-ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket({
-    _id: attrs.id,
-    title: attrs.title,
-    price: attrs.price
-  });
-};
-
 ticketSchema.set('versionKey', 'version');
 
 ticketSchema.plugin(updateIfCurrentPlugin); // 396 optional
@@ -72,6 +63,15 @@ ticketSchema.statics.findByEvent = (event: { id: string, version: number }) => {
     _id: event.id,
     version: event.version -1
   })
+};
+
+// for check with TS we call this function
+ticketSchema.statics.build = (attrs: TicketAttrs) => {
+  return new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price,
+  });
 };
 
 // run query look at all orders. find an order where the ticket
