@@ -2,13 +2,13 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
-
-
 declare global{
   var signin: (id?: string) => string[];
 }
 
 jest.mock('../nats-wrapper');
+
+process.env.STRIPE_KEY = 'sk_test_51JolOiLdd7o3SujLvTfYF1AAVkOmhXkIUtC6IozCmiUCXKwjGtqLt6vTluA39BmCFdeCEM7uRMqV1VZ4m1a2UbMD00CPlQQZYZ';
 
 let mongo: any;
 
