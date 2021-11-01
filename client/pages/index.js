@@ -1,7 +1,7 @@
 
 const LandingPage = ({ currentUser, tickets }) => {
 
-  const ticketList = ticket.map(ticket => {
+  const ticketList = tickets.map(ticket => {
     return (
       <tr key={ticket.id}>
         <td>{ticket.title}</td>
