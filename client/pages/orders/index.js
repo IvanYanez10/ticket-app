@@ -4,7 +4,7 @@ const OrderIndex = ({ orders }) => {
 
   const ordersList = orders.map((order) => {
     return (
-      <li key={ticket.id}>
+      <li key={order.id}>
         {order.ticket.title} - {order.status}
       </li>
     )
