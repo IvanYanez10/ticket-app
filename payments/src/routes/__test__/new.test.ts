@@ -5,6 +5,8 @@ import { natsWrapper } from '../../nats-wrapper';
 import mongoose from 'mongoose';
 import { OrderStatus } from '@iytickets/common';
 import { stripe } from '../../stripe';
+import { Payment } from '../../models/payments';
+
 
 //jest.mock('../../stripe');
 
@@ -101,9 +103,16 @@ it('returns a 201 with valid inputs', async () => {
     return charge.amount === price * 100
   });
 
-  console.log(stripeCharge);
+  //console.log(stripeCharge);
 
   expect(stripeCharge).toBeDefined();
+
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeCharge!.id
+  });
+
+  expect(payment).not.toBeNull();
 
   /* // using mock
   const chargeOptions  = (stripe.charges.create as jest.Mock).mock.calls[0][0];
@@ -113,5 +122,7 @@ it('returns a 201 with valid inputs', async () => {
   expect(chargeOptions.currency).toEqual('usd');
   */
 });
+
+
 
 
