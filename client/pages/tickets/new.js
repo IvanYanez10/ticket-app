@@ -5,7 +5,7 @@ import Router from 'next/router';
 const NewTicket = () => {
 
   const [title, setTitle] = useState('');
-  cosnt [price, setPrice] = usePrice('');
+  const [price, setPrice] = useState('');
 
   const { doRequest, errors } = useRquest({
     url: '/api/tickets',
