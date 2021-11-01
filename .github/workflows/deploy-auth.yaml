@@ -1,5 +1,5 @@
 
-name: tests-auth
+name: deploy-auth
 
 on:
   push:

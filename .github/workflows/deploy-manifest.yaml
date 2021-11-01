@@ -1,5 +1,5 @@
 
-name: tests-manifest
+name: deploy-manifest
 
 on:
   push:
