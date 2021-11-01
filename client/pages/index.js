@@ -1,17 +1,40 @@
-import buildClient from '../api/build-client';
+import { useState } from 'react';
+import useRquest from '../../hooks/use-request';
+import Router from 'next/router';
 
-const LandingPage = ({ currentUser }) => {
-  return currentUser 
-  ? <h1>Youre singnin</h1> 
-  : <h1>Youre not signin</h1>;
+const LandingPage = ({ currentUser, tickets }) => {
+
+  const ticketList = ticket.map(ticket => {
+    return (
+      <tr key={ticket.id}>
+        <td>{ticket.title}</td>
+        <td>{ticket.price}</td>
+      </tr>
+    )
+  });
+
+  return (
+    <div>
+      <h1>Tickets</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ticketList}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 // generated in server
-LandingPage.getInitialProps = async context => {
-  const client = buildClient(context);
-  const { data } = await client
-  .get('/api/users/currentuser');
-  return data;
+LandingPage.getInitialProps = async (context, client, currentUser) => {
+  const { data } = await client.get('api/tickets')
+  return { tickets: data };
 };
 
 export default LandingPage;
