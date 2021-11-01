@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import useRquest from '../../hooks/use-request';
-import Router from 'next/router';
 
 const LandingPage = ({ currentUser, tickets }) => {
 
